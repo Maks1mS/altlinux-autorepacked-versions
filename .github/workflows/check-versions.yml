@@ -27,5 +27,8 @@ jobs:
       
       - name: Commit and push updates
         run: |
+          git config --global --add safe.directory '*'
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -am "[automated action] update" || true
           git push
