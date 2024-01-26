@@ -1,0 +1,31 @@
+name: Check versions
+
+permissions:
+  contents: write
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: alt:p10
+    steps:
+      - name: install packages
+        run: |
+          apt-get update && apt-get -y install eepm
+          epm update
+    
+      - uses: actions/checkout@v3
+
+      - name: Check versions
+        run: |
+          ./update.sh
+      
+      - name: Commit and push updates
+        run: |
+          git commit -am "[automated action] update" || true
+          git push
