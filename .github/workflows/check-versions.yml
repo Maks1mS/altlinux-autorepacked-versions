@@ -19,7 +19,7 @@ jobs:
           apt-get update && apt-get -y install eepm git
           epm update
     
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
 
       - name: Check versions
         run: |
